@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 560px;
+            height: 50px;
+            border: 2px solid #b5b5b5;
+        }
+        
+        li {
+            list-style: none;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-top: 15px;
+        }
+        
+        #div0 {
+            color: black;
+            margin-left: 25px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset style="width:600px;color:#7c7c7c;">
+        <legend style="color:red">
+            <h1>网页换肤</h1>
+        </legend>
+
+        <ul>
+            <li class="0" style="background-color: darkgray;"></li>
+            <li class="1" style="background-color: blueviolet;"></li>
+            <li class="2" style="background-color: hotpink;"></li>
+            <li class="3" style="background-color: paleturquoise;"></li>
+            <li class="4" style="background-color: wheat;"></li>
+            <li class="5" style="background-color: springgreen;"></li>
+        </ul>
+
+        </br>
+        <div id="div0">LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了，该数据仍然存在，下次打开浏览器访问网站时仍然可以继续使用。</div>
+        </br>
+    </fieldset>
+</body>
+<script>
+    var color = document.getElementsByTagName("li");
+    var div0 = document.getElementById("div0");
+    for (var i = 0; i < color.length; i++) {
+        color[i].onclick = function() {
+            var j = this.className;
+            color[j].style.marginTop = "7px";
+            for (var k = 0; k < color.length; k++) {
+                if (k != j)
+                    color[k].style.marginTop = "15px";
+            }
+
+            var c = this.style.backgroundColor;
+            div0.style.backgroundColor = c;
+            window.localStorage.setItem("backgroundColor", c);
+            window.localStorage.setItem("class", j);
+        }
+
+    }
+
+    var getColor = window.localStorage.getItem("backgroundColor");
+    var getClass = window.localStorage.getItem("class");
+    if (getColor) {
+        div0.style.backgroundColor = getColor;
+        color[getClass].style.marginTop = "7px";
+
+    } else {
+        div0.style.backgroundColor = "darkgray";
+        color[0].style.marginTop = "7px";
+
+    }
+</script>
+
+</html>
